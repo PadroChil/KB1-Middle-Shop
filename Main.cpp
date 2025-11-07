@@ -4,7 +4,7 @@
 #include <iomanip>
 
 
-// Учетные записи
+// Учетные записи ------------------------------------------------------------------------------------------
 
 size_t userSize = 2;
 std::string  userStatus[3]{ "Супер администратор","Администратор","Сотрудник" };
@@ -12,6 +12,23 @@ std::string* loginArr = new std::string[userSize]{"admin","user"};
 std::string* passArr = new std::string[userSize]{"admin","user"};
 std::string* statusArr = new std::string[userSize]{ userStatus[0],userStatus[2] };
 std::string curentStatus;
+
+//----------------------------------------------------------------------------------------------------------
+
+
+// Склад ------------------------------------------------------------------------------------------
+
+size_t storageSize = 10;
+int* idArr = new int[storageSize] {};
+std::string* nameArr = new std::string[storageSize]{};
+double* priceArr = new double[storageSize] {};
+unsigned int* count = new unsigned int[storageSize] {};
+
+
+//----------------------------------------------------------------------------------------------------------
+
+
+
 
 
 void Start();
@@ -125,19 +142,19 @@ bool Login()
 
 void CreateStorage()
 {
-	const size_t staticSize = 10;
+	const unsigned int staticSize = 10;
 
-	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 };   // стол, кровать, стул, комод, шкаф, стеллаж, столик, полка, кресло и тумба 
+	int id[staticSize]{ 1,2,3,4,5,6,7,8,9,10 }; 
 	std::string name[staticSize]
 	{
-		"Cтол из термопасты","Дрявая Кровать","Железный стул",
+		"Cтол из термопасты","Дрявая Кровать","Електрический стул",
 		"Кривой Комод","Кожанный Шкаф","Кукулс Стелаж","Столик туалетный",
 		"Разбитая Полка","Кресло - качалка", "Прикроватная Тумба"
 
 	};
-	doudle price[staticSize]{ 5600.5, 15000.9, 3200.2,
+	double price[staticSize]{ 5600.5, 15000.9, 3200.2,
 		5000.1,20000.0,1500.4,2500.3,300.8,1488.1,1700.6 };
-	int count[staticSize]{5,4,8,10,7,14,9,12,23,15};
+	unsigned int count[staticSize]{5,4,8,10,7,14,9,12,23,15};
 
 }
 
