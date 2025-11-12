@@ -18,6 +18,7 @@ std::string curentStatus;
 //  ------------------------------------------------------- СКЛАД -----------------------------------------------------
 
 size_t storageSize = 0;
+size_t maxItemSize = 500;
 unsigned int* idArr = nullptr;
 std::string* nameArr = nullptr;
 double* priceArr = nullptr;
@@ -47,9 +48,8 @@ void Start();
 bool Login();
 void ShowSuperAdminMenu();
 
-void CreateStorage();
 
-
+bool IsNumber(const std::string &str);
 inline void Getline(std::string& str);
 inline void Err();
 //----------------------------------------------------------------------------------------------------------
@@ -296,22 +296,84 @@ void ShowStorage(int mode)
 
 void AddStorageItem()
 {
-	std::string chooseId, chooseCount;
+	std::string chooseId, chooseCount , choose;
 	unsigned int id = 0, count = 0;
 
 	while (true)
 	{
 		system("cls");
+		ShowStorage(1);
+
+		std::cout << "Введите ID товара или \"exit\" для выхода: ";
+		Getline(chooseId);
+		if (chooseId == "exit")
+		{
+			std::cout << "Отмена операции пополнения склада!\n";
+			Sleep(1500);
+			system("cls");
+			break;
+		}
+		std::cout << "Введите кол-во товара для пополнения: ";
+		Getline(chooseCount);
+
+		if (IsNumber(chooseId) && IsNumber(chooseCount))
+		{
+			id = std::stoi(chooseId) - 1;
+			count = std::stoi(chooseCount);
+
+			if (id < 0 || id > storageSize -1 || count < 0 || count > maxItemSize)
+			{
+				std::cout << "Некорректный id или кол-во\nМаксимальнле кол-во - " << maxItemSize << "\n\n";
+				Sleep(1500);
+			}
+			else
+			{
+				std::cout << std::left << std::setw(25) << nameArr[id] << "\t"
+					<< countArr[id] << "---> " << countArr[id] + count << "\n\n";
+				std::cout << "Подтвердить?\n1 - Да\n2 - Нет\nВвод: ";
+				Getline(choose);
+				if (choose =="1")
+				{
+					countArr[id] += count;
+					std::cout << "Товар успешно пополнен\n\n";
+					Sleep(1500);
+					system("cls");
+					break;
+				}
+			}
+		}
 
 	}
 
 }
 
 
+bool IsNumber(const std::string& str)
+{
+	if (str.size() <= 0 || str.size() >= 10)
+	{
+		std::cout << "Некоректный ввод\n";
+		std::cout << "Ошибка размера числа. От 1 до 9 символов включительно\n\n";
+		Sleep(1500);
+		return false;
+	}
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		if (!std::isdigit(str[i]))
+		{
+			std::cout << "Некоректный ввод\n";
+			std::cout << "Введенные данные не являются числом\n\n";
+			Sleep(1500);
+			return false;
+		}
+	}
+	return true;
+}
+
+
 inline void Getline(std::string& str)
 {
 	std::getline(std::cin, str, '\n');
-
 }
 
 
