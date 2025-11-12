@@ -25,7 +25,8 @@ unsigned int* countArr = nullptr;
 bool isStorageCreated = false;
 
 void CreateStorage();
-void ShowStorage();
+void ShowStorage(int mode = 0);
+void AddStorageItem();
 
 template<typename ArrType > 
 void FillArr(ArrType* dynamicArr, ArrType* staticArr, size_t arraySize)
@@ -76,6 +77,7 @@ void Start()
 	std::string choose;
 	if (Login())
 	{
+		system("cls");
 		if (curentStatus == userStatus[0])
 		{
 			while (true)
@@ -85,7 +87,7 @@ void Start()
 				if (choose == "1")
 				{
 					CreateStorage();
-					ShowStorage();
+					ShowSuperAdminMenu();
 					break;
 				}
 				else if (choose == "2")
@@ -119,6 +121,7 @@ void Start()
 	}
 }
 
+
 bool Login()
 {
 	std::string login, pass;
@@ -150,6 +153,7 @@ bool Login()
 		Err();
 	}
 }
+
 
 void ShowSuperAdminMenu()
 {
@@ -214,6 +218,7 @@ void ShowSuperAdminMenu()
 
 }
 
+
 void CreateStorage()
 {
 	const unsigned int staticSize = 10;
@@ -244,26 +249,71 @@ void CreateStorage()
 
 }
 
-void ShowStorage()
-{
-	system("cls");
-	std::cout << "ID\t" << std::left << std::setw(25) << "Название товара\t\t"
-		<< "Цена\t" << "Кол-во\n";
 
-	for (size_t i = 0; i < storageSize; i++)
+void ShowStorage(int mode)
+{
+	if (mode == 0)
 	{
-		std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t"
-			<< priceArr[i] << "\t" << countArr[i] << "\n";
+		system("cls");
+		std::cout << "ID\t" << std::left << std::setw(25) << "Название товара\t\t"
+			<< "Цена\t" << "Кол-во\n";
+
+		for (size_t i = 0; i < storageSize; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t"
+				<< priceArr[i] << "\t" << countArr[i] << "\n";
+		}
+		system("pause");
+		system("cls");
 	}
-	system("pause");
-	system("cls");
+	else if (mode == 1)
+	{
+		std::cout << "ID\t" << std::left << std::setw(25) << "Название товара\t\t"
+		 << "Кол-во\n";
+
+		for (size_t i = 0; i < storageSize; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t"
+				 << countArr[i] << "\n";
+		}
+	
+	}
+	else if (mode == 2)
+	{
+		std::cout << "ID\t" << std::left << std::setw(25) << "Название товара\t\t"
+			<< "Цена\t";
+
+		for (size_t i = 0; i < storageSize; i++)
+		{
+			std::cout << idArr[i] << "\t" << std::left << std::setw(25) << nameArr[i] << "\t"
+				<< priceArr[i] << "\n";
+		}
+
+	}
+
 }
+
+
+void AddStorageItem()
+{
+	std::string chooseId, chooseCount;
+	unsigned int id = 0, count = 0;
+
+	while (true)
+	{
+		system("cls");
+
+	}
+
+}
+
 
 inline void Getline(std::string& str)
 {
 	std::getline(std::cin, str, '\n');
 
 }
+
 
 inline void Err()
 {
