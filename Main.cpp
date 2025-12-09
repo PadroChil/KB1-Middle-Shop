@@ -171,7 +171,7 @@ void Start()
 					{
 						if (isStorageCreated == false)
 						{
-
+							CreateNewStorage();
 						}
 						system("cls");
 						ShowSuperAdminMenu();
@@ -1332,25 +1332,32 @@ void CreateStorage()
 
 void CreateNewStorage()
 {
-	const unsigned int defaultSize = 10; // или любой желаемый размер по умолчанию
+	const unsigned int staticSize = 10;
 
-	// ≈сли склад уже существует, освобождаем пам€ть
+	unsigned int id[staticSize]{};
+	std::string name[staticSize];
+	{
+
+	};
+	double price[staticSize]{};
+	unsigned int count[staticSize]{};
+
 	if (isStorageCreated)
 	{
-		delete[] idArr;
-		delete[] nameArr;
-		delete[] countArr;
-		delete[] priceArr;
+		delete[]idArr, nameArr, countArr, priceArr;
 	}
 
-	// ¬ыдел€ем пам€ть дл€ пустого склада
-	idArr = new unsigned int[defaultSize] {};
-	nameArr = new std::string[defaultSize]{};
-	countArr = new unsigned int[defaultSize] {};
-	priceArr = new double[defaultSize] {};
+	storageSize = staticSize;
+	idArr = new unsigned int[storageSize];
+	nameArr = new std::string[storageSize];
+	countArr = new unsigned int[storageSize];
+	priceArr = new double[storageSize];
+	isStorageCreated = true;
 
-	storageSize = defaultSize;
-	isStorageCreated = true;;
+	FillArr(idArr, id, storageSize);
+	FillArr(nameArr, name, storageSize);
+	FillArr(countArr, count, storageSize);
+	FillArr(priceArr, price, storageSize);
 }
 
 
